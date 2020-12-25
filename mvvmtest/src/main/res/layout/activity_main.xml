@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?><!--以layout作为主框架-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <!--        usermodel相当于UserModel类的对象，可以调用对象的值-->
+        <!--        先在data中声明再使用-->
+        <!--        <variable-->
+        <!--            name="usermodel"-->
+        <!--            type="com.example.mvvm.model.UserModel" />-->
+        <variable
+            name="userviewmodel"
+            type="com.example.mvvm.model.UserViewModel" />
+
+<!--        <import type="com.example.mvvm.model.UserModel" />-->
+
+<!--        <variable-->
+<!--            name="usermodel"-->
+<!--            type="UserModel" />-->
+        <import type="com.example.mvvm.model.UserModel2" />
+
+        <variable
+            name="usermodel"
+            type="UserModel2" />
+
+
+        <import type="android.text.TextUtils" />
+        <!--        当引入两个相同的类名时，用alias给类取别名作区分-->
+        <import
+            alias="MyTextUtils"
+            type="com.example.mvvm.util.TextUtils" />
+
+        <variable
+            name="myutils"
+            type="MyTextUtils" />
+        <variable
+            name="usermodel3"
+            type="com.example.mvvm.model.UserModel3" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)->userviewmodel.showName()}"
+            android:text="@{usermodel.name}"
+            android:textSize="15sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{usermodel3.describe}"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/text_view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@{myutils.getName()}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@{TextUtils.isEmpty(usermodel.name)?null:usermodel.name}" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            app:showPhoto="@{usermodel.userPhoto}" />
+
+        <Button
+            android:onClick="@{(v)->userviewmodel.update()}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实现Observable更新" />
+        <Button
+            android:onClick="@{(v)->userviewmodel.update2()}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="继承BaseObservable更新" />
+        <Button
+            android:onClick="@{(v)->userviewmodel.update3()}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="继承BaseObservable更新" />
+        <Button
+            android:onClick="@{(v)->userviewmodel.toEditActivity()}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to EditActivity" />
+        <Button
+            android:onClick="@{(v)->userviewmodel.toRecycleActivity()}"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="to RecycleActivity" />
+    </LinearLayout>
+</layout>
